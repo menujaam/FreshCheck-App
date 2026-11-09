@@ -4,10 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7f8f4">
+<meta name="color-scheme" content="light only">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <style>
-:root{color-scheme:light dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html,body{margin:0}
 [hidden]{display:none!important}
 </style>
@@ -24,20 +25,6 @@ html,body{margin:0}
   --sand:#f4ead9; --sand-ink:#8a5a1f; --sand-icon:#f3e8d5;
   --good-bg:#e3ecdd; --good-fg:#1f4d33; --warn-bg:#f4ead9; --warn-fg:#8a5a1f; --bad-bg:#f8e3e0; --bad-fg:#9b3a35;
   --font:"Inter","Helvetica Neue",Arial,"Liberation Sans",sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0c110e; --screen:#121713; --panel:#1b221d; --ink:#e4ece6; --muted:#98a89d; --line:#2b362e; --field:#4a5a4e;
-    --accent:#7fc29c; --accent-ink:#0b1a12; --soft:#1f2d24; --lilac:#2a2536; --lilac-ink:#cdbfe6; --frame:#2b362e;
-    --sand:#352c1c; --sand-ink:#f0cd82; --sand-icon:#3a3020;
-    --good-bg:#1f3a28; --good-fg:#a8dcb8; --warn-bg:#3d3013; --warn-fg:#f0cd82; --bad-bg:#442020; --bad-fg:#f2b0b0; color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0c110e; --screen:#121713; --panel:#1b221d; --ink:#e4ece6; --muted:#98a89d; --line:#2b362e; --field:#4a5a4e;
-  --accent:#7fc29c; --accent-ink:#0b1a12; --soft:#1f2d24; --lilac:#2a2536; --lilac-ink:#cdbfe6; --frame:#2b362e;
-  --sand:#352c1c; --sand-ink:#f0cd82; --sand-icon:#3a3020;
-  --good-bg:#1f3a28; --good-fg:#a8dcb8; --warn-bg:#3d3013; --warn-fg:#f0cd82; --bad-bg:#442020; --bad-fg:#f2b0b0; color-scheme:dark;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
@@ -219,7 +206,6 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 .guide ol{padding-left:20px;margin:0 0 16px;font-size:14.5px;line-height:1.6}
 .guide li{margin-bottom:6px}
 .guide .note{font-size:13px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
-.guide .theme{all:unset;cursor:pointer;font-size:13px;color:var(--accent);font-weight:600;margin-top:8px;display:inline-block}
 @media (max-width:520px){
   html,body{overscroll-behavior:none}
   body{padding:0}
@@ -254,7 +240,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
       <li>Inventory: search, open an item, or tap the "use sooner" banner to go to recipes.</li>
       <li>Recipes: choose ingredients (spoiled food is locked out), swipe the ideas, open one and mark it as used.</li>
     </ol>
-    <p class="note">The pH cut-offs and the remaining days are placeholders. The real values will come from my food experiment. The result does not come from the photo yet, because the colour-to-pH model is not connected. Freshness labels are indicative, not safety guarantees.<br><button class="theme" id="theme" type="button">Switch light / dark</button></p>
+    <p class="note">The pH cut-offs and the remaining days are placeholders. The real values will come from my food experiment. The result does not come from the photo yet, because the colour-to-pH model is not connected. Freshness labels are indicative, not safety guarantees.</p>
   </aside>
 </div>
 
@@ -612,12 +598,6 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
     }
   });
 
-  $('#theme').addEventListener('click',function(){
-    var root=document.documentElement, dark=getComputedStyle(root).colorScheme==='dark';
-    root.setAttribute('data-theme',dark?'light':'dark');
-    try{localStorage.setItem('fc-theme',dark?'light':'dark')}catch(e){}
-  });
-  try{var t=localStorage.getItem('fc-theme'); if(t) document.documentElement.setAttribute('data-theme',t)}catch(e){}
   render();
 })();
 </script>
